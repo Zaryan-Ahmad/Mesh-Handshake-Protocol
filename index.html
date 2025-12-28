@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOIN THE MESH</title>
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --text-color: #e0e0e0;
+            --accent-color: #00ff41; /* Hacker Green */
+            --secondary-accent: #ff0055; /* Cyberpunk Pink for errors/secondary */
+            --font-main: 'Courier New', Courier, monospace;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            border: 1px solid var(--text-color);
+            padding: 2rem;
+            position: relative;
+            box-shadow: 10px 10px 0px var(--text-color);
+        }
+
+        h1 {
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--text-color);
+            padding-bottom: 1rem;
+            margin-top: 0;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+        }
+
+        .glitch-text {
+            color: var(--accent-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        /* Subtle hint text for the email placeholder */
+        ::placeholder {
+            color: #555;
+            opacity: 1; 
+        }
+
+        input, select, textarea {
+            width: 100%;
+            background: transparent;
+            border: 1px solid #555;
+            color: var(--text-color);
+            padding: 12px;
+            font-family: var(--font-main);
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background: #111;
+        }
+
+        button {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            border: none;
+            padding: 1rem 2rem;
+            font-family: var(--font-main);
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            width: 100%;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            background-color: var(--accent-color);
+            color: black;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 1rem;
+            color: var(--accent-color);
+        }
+
+        #success-msg {
+            display: none;
+            text-align: center;
+            border: 1px solid var(--accent-color);
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .node-selection-group {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .node-selection-group .form-group {
+            flex: 1;
+        }
+
+        @media (max-width: 500px) {
+            .node-selection-group {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>> Initialize_Sequence: <span class="glitch-text">RECRUITMENT</span></h1>
+    <p>Mesh Minds is a research lab. We do not recruit, we select. Fill this data to begin the handshake protocol.</p>
+    
+    <form id="meshForm">
+        
+        <div class="form-group">
+            <label for="Name">Codename / Full Name</label>
+            <input type="text" id="Name" name="Name" placeholder="(Zax)" required>
+        </div>
+
+        <div class="form-group">
+            <label for="Email">University/Personal Email</label>
+            <input type="email" id="Email" name="Email" placeholder="You'll receive confirmation on this email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="Session">Session (Year)</label>
+            <input type="text" id="Session" name="Session" placeholder="2022-2026" required>
+        </div>
+
+        <div class="form-group">
+            <label for="Department">Department</label>
+            <input type="text" id="Department" name="Department" placeholder="Computer Science" required>
+        </div>
+
+        <div class="node-selection-group">
+            <div class="form-group">
+                <label for="Primary_Node">Primary Node</label>
+                <select id="Primary_Node" name="Primary_Node" required>
+                    <option value="" disabled selected>-- MAIN --</option>
+                    <option value="SYNAPSE">NODE: SYNAPSE (Research)</option>
+                    <option value="SIGNAL">NODE: SIGNAL (Content)</option>
+                    <option value="FOUNDRY">NODE: FOUNDRY (Tech)</option>
+                    <option value="KINETIC">NODE: KINETIC (Ops)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="Secondary_Node">Secondary Node</label>
+                <select id="Secondary_Node" name="Secondary_Node" required>
+                    <option value="" disabled selected>-- BACKUP --</option>
+                    <option value="SYNAPSE">NODE: SYNAPSE</option>
+                    <option value="SIGNAL">NODE: SIGNAL</option>
+                    <option value="FOUNDRY">NODE: FOUNDRY</option>
+                    <option value="KINETIC">NODE: KINETIC</option>
+                    <option value="NONE">NO SECONDARY</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="Why_Apply">Why does the current education system fail you?</label>
+            <textarea id="Why_Apply" name="Why_Apply" rows="4" placeholder="Be honest. Be brutal." required></textarea>
+        </div>
+
+        <button type="submit" id="submitBtn">TRANSMIT DATA</button>
+        <div class="loading" id="loading-txt">Transmitting packets...</div>
+    </form>
+
+    <div id="success-msg">
+        <h3>> TRANSMISSION SUCCESSFUL</h3>
+        <p>Your data is in the Mesh. Check your email for confirmation.</p>
+    </div>
+</div>
+
+<script>
+    // -----------------------------------------------------------------------
+    // PASTE YOUR GOOGLE SCRIPT WEB APP URL INSIDE THE QUOTES BELOW
+    // -----------------------------------------------------------------------
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyqji7IKHQVGngbgsTk8q_1FG9QWXBWp6aFtl6EsYFh9zzyNGiGEvKEIA2AmnhwqOyD3A/exec'; 
+    
+    const form = document.forms['meshForm'];
+    const btn = document.getElementById('submitBtn');
+    const loading = document.getElementById('loading-txt');
+    const successMsg = document.getElementById('success-msg');
+    const formContainer = document.getElementById('meshForm');
+
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        
+        // Simple Validation: Ensure Primary and Secondary are not the same
+        const primary = document.getElementById("Primary_Node").value;
+        const secondary = document.getElementById("Secondary_Node").value;
+
+        if (primary === secondary && secondary !== "NONE") {
+            alert("ERROR: Primary and Secondary nodes cannot be the same. Choose a different backup or select 'NO SECONDARY'.");
+            return;
+        }
+
+        // UI Updates
+        btn.disabled = true;
+        btn.style.opacity = "0.5";
+        loading.style.display = "block";
+
+        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {
+                loading.style.display = "none";
+                formContainer.style.display = "none"; 
+                successMsg.style.display = "block"; 
+            })
+            .catch(error => {
+                console.error('Error!', error.message);
+                loading.innerText = "ERROR: CONNECTION REFUSED. CHECK CONSOLE.";
+                loading.style.color = "red";
+                btn.disabled = false;
+            });
+    });
+</script>
+
+</body>
+</html>
